@@ -17,10 +17,7 @@ import java.util.ArrayList;
 public class Library {
     private ArrayList<Book> books = new ArrayList<>();
 
-    /**
-     * Adds books to the library collection from a specified file.
-     * @param filePath The path to the text file containing book details.
-     */
+    // Method to add books from a file
     public void addBooksFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -37,28 +34,19 @@ public class Library {
         }
     }
 
-    /**
-     * Removes a book from the collection by its ID.
-     * @param id The ID of the book to remove.
-     */
+    // Method to remove a book by its ID
     public void removeBookById(int id) {
         books.removeIf(book -> book.getId() == id);
         System.out.println("Book removed successfully.");
     }
 
-    /**
-     * Removes a book from the collection by its title.
-     * @param title The title of the book to remove.
-     */
+    // Method to remove a book by its title
     public void removeBookByTitle(String title) {
         books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
         System.out.println("Book removed successfully.");
     }
 
-    /**
-     * Checks out a book by its title. Changes the book's status and sets the due date.
-     * @param title The title of the book to check out.
-     */
+    // Method to check out a book by its title
     public void checkOutBook(String title) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
@@ -75,10 +63,7 @@ public class Library {
         System.out.println("Book with title '" + title + "' not found.");
     }
 
-    /**
-     * Checks in a book by its title. Changes the book's status to "checked in" and clears the due date.
-     * @param title The title of the book to check in.
-     */
+    // Method to check in a book by its title
     public void checkInBook(String title) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
@@ -91,14 +76,17 @@ public class Library {
         System.out.println("Book with title '" + title + "' not found.");
     }
 
-    /**
-     * Lists all books currently in the collection.
-     */
+    // Method to list all books currently in the collection
     public void listBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the collection.");
         } else {
-            books.forEach(book -> System.out.println(book));
+            books.forEach(System.out::println);
         }
+    }
+
+    // Getter method for books
+    public ArrayList<Book> getBooks() {
+        return books;
     }
 }

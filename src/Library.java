@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 /**
  * Library.java
- * Name: [Joshua Torres]
+ * Name: [Your Name]
  * Course: [CEN-3024C]
- * Date: [8/30/24]
+ * Date: [Today's Date]
  *
  * This class manages the collection of books in the Library Management System.
  * It provides methods to add books from a file, remove a book by its ID or title,
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class Library {
     private ArrayList<Book> books = new ArrayList<>();
 
-    // Method to add books from a file
     public void addBooksFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -34,19 +33,16 @@ public class Library {
         }
     }
 
-    // Method to remove a book by its ID
     public void removeBookById(int id) {
         books.removeIf(book -> book.getId() == id);
         System.out.println("Book removed successfully.");
     }
 
-    // Method to remove a book by its title
     public void removeBookByTitle(String title) {
         books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
         System.out.println("Book removed successfully.");
     }
 
-    // Method to check out a book by its title
     public void checkOutBook(String title) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
@@ -55,7 +51,7 @@ public class Library {
                     return;
                 }
                 book.setStatus("checked out");
-                book.setDueDate(LocalDate.now().plusWeeks(4)); // Set due date to 4 weeks from now
+                book.setDueDate(LocalDate.now().plusWeeks(4));
                 System.out.println("Book checked out successfully. Due date is " + book.getDueDate());
                 return;
             }
@@ -63,12 +59,11 @@ public class Library {
         System.out.println("Book with title '" + title + "' not found.");
     }
 
-    // Method to check in a book by its title
     public void checkInBook(String title) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
-                book.setStatus("checked in"); // Change status to "checked in"
-                book.setDueDate(null); // Clear due date
+                book.setStatus("checked in");
+                book.setDueDate(null);
                 System.out.println("Book checked in successfully. Status is now 'checked in'. Due date is now null.");
                 return;
             }
@@ -76,7 +71,6 @@ public class Library {
         System.out.println("Book with title '" + title + "' not found.");
     }
 
-    // Method to list all books currently in the collection
     public void listBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the collection.");
@@ -85,7 +79,6 @@ public class Library {
         }
     }
 
-    // Getter method for books
     public ArrayList<Book> getBooks() {
         return books;
     }

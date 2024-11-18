@@ -4,13 +4,12 @@ import java.awt.event.ActionListener;
 
 /**
  * LibraryGUIForm.java
- * Name: [Your Name]
+ * Name: [Joshua Torres]
  * Course: [CEN-3024C]
  * Date: [Today's Date]
  *
  * This class represents the GUI for the Library Management System,
- * allowing users to interact with the library functionalities such as
- * adding books, listing books, checking books in/out, and removing books by ID or title.
+ * allowing users to interact with the library functionalities.
  */
 public class LibraryGUIForm extends JFrame {
     // Instance of the Library class to manage the collection of books

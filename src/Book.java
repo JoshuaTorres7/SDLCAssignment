@@ -2,9 +2,9 @@ import java.time.LocalDate;
 
 /**
  * Book.java
- * Name: [Your Name]
+ * Name: [Joshua Torres]
  * Course: [CEN-3024C]
- * Date: [Today's Date]
+ * Date: [8/30/24]
  *
  * This class represents a book in the Library Management System,
  * with properties like ID, title, author, status, and due date.

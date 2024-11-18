@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 /**
  * Library.java
- * Name: [Your Name]
+ * Name: [Joshua Torres]
  * Course: [CEN-3024C]
- * Date: [Today's Date]
+ * Date: [8/30/24]
  *
  * This class manages the collection of books in the Library Management System.
  * It provides methods to add books from a file, remove a book by its ID or title,

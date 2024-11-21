@@ -2,20 +2,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * LibraryGUIForm.java
- * Name: [Joshua Torres]
- * Course: [CEN-3024C]
- * Date: [11/3/24]
- *
- * This class represents the GUI for the Library Management System, allowing users to interact with the
- * library functionalities such as adding books, listing books, checking books in/out, and removing books by ID or title.
- */
 public class LibraryGUIForm extends JFrame {
-    // Instance of the DatabaseManager to manage the collection of books
+
     private DatabaseManager databaseManager;
 
-    // GUI components
     private JTextField filePathTextField;
     private JButton addBooksButton;
     private JButton listBooksButton;
@@ -25,19 +15,11 @@ public class LibraryGUIForm extends JFrame {
     private JButton checkInButton;
     private JButton exitButton;
 
-    /**
-     * Constructor for LibraryGUIForm
-     * Initializes the databaseManager instance and calls initComponents to set up the GUI.
-     */
     public LibraryGUIForm() {
-        databaseManager = new DatabaseManager();  // Database manager to handle book operations
-        initComponents();  // Initialize the GUI components
+        databaseManager = new DatabaseManager();
+        initComponents();
     }
 
-    /**
-     * initComponents
-     * Sets up and configures all GUI components including labels, buttons, and text fields.
-     */
     private void initComponents() {
         // Frame properties
         setTitle("Library Management System");
@@ -62,7 +44,9 @@ public class LibraryGUIForm extends JFrame {
         addBooksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                databaseManager.addBooksFromFile(filePathTextField.getText());  // Load books from the file
+                String title = JOptionPane.showInputDialog("Enter Book Title:");
+                String author = JOptionPane.showInputDialog("Enter Book Author:");
+                databaseManager.addBook(title, author);
             }
         });
 
@@ -73,7 +57,7 @@ public class LibraryGUIForm extends JFrame {
         listBooksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                databaseManager.listBooks();  // Display list of all books
+                databaseManager.listBooks();  // List all books
             }
         });
 
@@ -86,7 +70,7 @@ public class LibraryGUIForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String idStr = JOptionPane.showInputDialog("Enter Book ID to Remove:");
                 int id = Integer.parseInt(idStr);
-                databaseManager.removeBookById(id);  // Remove book with the specified ID
+                databaseManager.removeBookById(id);  // Remove book by ID
             }
         });
 
@@ -98,7 +82,7 @@ public class LibraryGUIForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String title = JOptionPane.showInputDialog("Enter Book Title to Remove:");
-                databaseManager.removeBookByTitle(title);  // Remove book with the specified title
+                databaseManager.removeBookByTitle(title);  // Remove book by Title
             }
         });
 
@@ -110,7 +94,7 @@ public class LibraryGUIForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String title = JOptionPane.showInputDialog("Enter Book Title to Check Out:");
-                databaseManager.checkOutBook(title);  // Mark the book as checked out
+                databaseManager.checkOutBook(title);  // Check out book
             }
         });
 
@@ -122,7 +106,7 @@ public class LibraryGUIForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String title = JOptionPane.showInputDialog("Enter Book Title to Check In:");
-                databaseManager.checkInBook(title);  // Mark the book as checked in
+                databaseManager.checkInBook(title);  // Check in book
             }
         });
 
@@ -138,16 +122,10 @@ public class LibraryGUIForm extends JFrame {
         });
     }
 
-    /**
-     * Main method to launch the Library Management System GUI.
-     * This method starts the program and creates the main GUI window.
-     * The Library Management System allows users to perform actions such as
-     * adding books, checking books in/out, and removing books by ID or title.
-     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LibraryGUIForm form = new LibraryGUIForm();
-            form.setVisible(true);  // Display the GUI window
+            form.setVisible(true);  // Show the GUI
         });
     }
 }

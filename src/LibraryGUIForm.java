@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 /**
  * LibraryGUIForm.java
- * Name: [Joshua Torre]
+ * Name: [Joshua Torres]
  * Course: [CEN-3024C]
  * Date: [11/3/24]
  *

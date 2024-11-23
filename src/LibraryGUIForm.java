@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
  * Course: [CEN-3024C]
  * Date: [11/3/24]
  *
- * This class represents the GUI for the Library Management System, allowing users to interact with the
+ * This class represents the GUI for the Library Management System. It allows users to interact with the
  * library functionalities such as adding books, listing books, checking books in/out, and removing books by ID or title.
  */
 public class LibraryGUIForm extends JFrame {
@@ -28,79 +28,87 @@ public class LibraryGUIForm extends JFrame {
      */
     private void initComponents() {
         // Setting up the window (JFrame) for the Library Management System
-        setTitle("Library Management System"); // Set the window title
-        setSize(400, 300); // Set the window size
-        setDefaultCloseOperation(EXIT_ON_CLOSE); // Define the close operation
-        setLayout(null); // Use null layout for absolute positioning of components
+        setTitle("Library Management System");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
 
-        // Button to list all books in the database
+        // Button to list all books
         JButton listBooksButton = new JButton("List Books");
-        listBooksButton.setBounds(10, 10, 150, 25); // Set position and size of the button
-        add(listBooksButton); // Add the button to the frame
-        listBooksButton.addActionListener(e -> databaseManager.listBooks()); // Action listener to list books
+        listBooksButton.setBounds(10, 10, 150, 25);
+        add(listBooksButton);
+        listBooksButton.addActionListener(e -> databaseManager.listBooks());
 
-        // Button to add a new book to the database
+        // Button to add a new book
         JButton addBookButton = new JButton("Add Book");
-        addBookButton.setBounds(10, 50, 150, 25); // Set position and size of the button
-        add(addBookButton); // Add the button to the frame
+        addBookButton.setBounds(10, 50, 150, 25);
+        add(addBookButton);
         addBookButton.addActionListener(e -> {
-            // Prompt user to enter book title and author
-            String title = JOptionPane.showInputDialog("Enter Book Title:");
-            String author = JOptionPane.showInputDialog("Enter Book Author:");
-            databaseManager.addBook(title, author); // Call method to add the book to the database
+            String title = getUserInput("Enter Book Title:");
+            String author = getUserInput("Enter Book Author:");
+            databaseManager.addBook(title, author);
         });
 
-        // Button to remove a book from the database by its ID
+        // Button to remove a book by ID
         JButton removeByIdButton = new JButton("Remove by ID");
-        removeByIdButton.setBounds(10, 90, 150, 25); // Set position and size of the button
-        add(removeByIdButton); // Add the button to the frame
+        removeByIdButton.setBounds(10, 90, 150, 25);
+        add(removeByIdButton);
         removeByIdButton.addActionListener(e -> {
-            // Prompt user to enter book ID to remove
-            String idStr = JOptionPane.showInputDialog("Enter Book ID:");
+            String idStr = getUserInput("Enter Book ID:");
             try {
-                int bookId = Integer.parseInt(idStr); // Parse the ID to an integer
-                databaseManager.removeBookById(bookId); // Call method to remove the book by ID
+                int bookId = Integer.parseInt(idStr);
+                databaseManager.removeBookById(bookId);
             } catch (NumberFormatException ex) {
-                // Handle invalid ID format
                 JOptionPane.showMessageDialog(this, "Invalid ID format. Please enter a number.");
             }
         });
 
-        // Button to remove a book from the database by its title
+        // Button to remove a book by title
         JButton removeByTitleButton = new JButton("Remove by Title");
-        removeByTitleButton.setBounds(10, 130, 150, 25); // Set position and size of the button
-        add(removeByTitleButton); // Add the button to the frame
+        removeByTitleButton.setBounds(10, 130, 150, 25);
+        add(removeByTitleButton);
         removeByTitleButton.addActionListener(e -> {
-            // Prompt user to enter book title to remove
-            String title = JOptionPane.showInputDialog("Enter Book Title:");
-            databaseManager.removeBookByTitle(title); // Call method to remove the book by title
+            String title = getUserInput("Enter Book Title:");
+            databaseManager.removeBookByTitle(title);
         });
 
-        // Button to check out a book from the database
+        // Button to check out a book
         JButton checkOutButton = new JButton("Check Out Book");
-        checkOutButton.setBounds(200, 10, 150, 25); // Set position and size of the button
-        add(checkOutButton); // Add the button to the frame
+        checkOutButton.setBounds(200, 10, 150, 25);
+        add(checkOutButton);
         checkOutButton.addActionListener(e -> {
-            // Prompt user to enter book title to check out
-            String title = JOptionPane.showInputDialog("Enter Book Title to Check Out:");
-            databaseManager.checkOutBook(title); // Call method to check out the book
+            String title = getUserInput("Enter Book Title to Check Out:");
+            databaseManager.checkOutBook(title);
         });
 
-        // Button to check in a book to the database
+        // Button to check in a book
         JButton checkInButton = new JButton("Check In Book");
-        checkInButton.setBounds(200, 50, 150, 25); // Set position and size of the button
-        add(checkInButton); // Add the button to the frame
+        checkInButton.setBounds(200, 50, 150, 25);
+        add(checkInButton);
         checkInButton.addActionListener(e -> {
-            // Prompt user to enter book title to check in
-            String title = JOptionPane.showInputDialog("Enter Book Title to Check In:");
-            databaseManager.checkInBook(title); // Call method to check in the book
+            String title = getUserInput("Enter Book Title to Check In:");
+            databaseManager.checkInBook(title);
         });
 
         // Button to exit the application
         JButton exitButton = new JButton("Exit");
-        exitButton.setBounds(200, 90, 150, 25); // Set position and size of the button
-        add(exitButton); // Add the button to the frame
-        exitButton.addActionListener(e -> System.exit(0)); // Close the application when clicked
+        exitButton.setBounds(200, 90, 150, 25);
+        add(exitButton);
+        exitButton.addActionListener(e -> {
+            int confirmed = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+    }
+
+    /**
+     * Helper method to get user input from a dialog box.
+     * @param message The message to prompt the user with.
+     * @return The user's input as a String.
+     */
+    private String getUserInput(String message) {
+        return JOptionPane.showInputDialog(message);
     }
 
     /**
@@ -108,7 +116,6 @@ public class LibraryGUIForm extends JFrame {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // Create and display the LibraryGUIForm
             LibraryGUIForm form = new LibraryGUIForm();
             form.setVisible(true);
         });
